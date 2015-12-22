@@ -1,11 +1,10 @@
 package rdf;
 
 import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by hdhamee on 12/21/15.
@@ -31,8 +30,8 @@ public class RDFAPIDemo {
         Resource johnSmith = model.createResource(personURI)
                 .addProperty(VCARD.FN, fullName)
                 .addProperty(VCARD.N,model.createResource()
-                                .addProperty(VCARD.Given, givenName)
-                                .addProperty(VCARD.Family, familyName));
+                        .addProperty(VCARD.Given, givenName)
+                        .addProperty(VCARD.Family, familyName));
         System.out.println("Resource.toString() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("\nResource: " + johnSmith.toString() + "\n");
 
@@ -83,5 +82,37 @@ public class RDFAPIDemo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+        // Reading RDF model
+        // create an empty model
+        Model modelForRead = ModelFactory.createDefaultModel();
+
+        // use the FileManager to find the input file
+        InputStream in = FileManager.get().open("RDF-XML-ABBREV.rdf");
+        if (in == null) {
+            throw new IllegalArgumentException(
+                    "File: " + "RDF-XML-ABBREV.rdf" + " not found");
+        }
+
+        // read the RDF/XML file
+        modelForRead.read(in, null);
+
+        // write it to standard out
+        System.out.println("Reading from file>>>>>>>>>>>>>>>>>>>");
+        model.write(System.out);
+
+        // Operations in models
+        // read the RDF/XML files
+        //model.read(new InputStreamReader(in1), "");
+        //modelForRead.read(new InputStreamReader(in2), "");
+
+        // merge the Models
+        Model unionModel = model.union(modelForRead);
+
+        // print the Model as RDF/XML
+        System.out.println("Union of models >>>>>>>>>>>>>>>>>>>>>>>>>>");
+        model.write(System.out, "RDF/XML-ABBREV");
     }
 }
