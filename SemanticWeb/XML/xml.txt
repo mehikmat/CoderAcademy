@@ -1,0 +1,37 @@
+- XML namespace are used for conflict avoiding while merging multiple xml documents.
+- An XML document with correct syntax is called "Well Formed".
+- A "valid" XML document must be well formed. In addition it must conform to a document type definition.
+
+
+- Formatting XML with CSS is not recommended. Use JavaScript or XSLT instead.
+
+
+- XSLT is used to transform xml document to other formats. Example: xml to html doc.
+- XSLT(eXtensible Stylesheet Language Transformations) is the recommended style sheet language for XML.
+
+
+- XPath is a syntax for defining parts of an XML document.
+- XPath uses path expressions to select nodes or node-sets in an XML document.
+- XPath is a major element in the XSLT standard. Without XPath knowledge you will not be able to create XSLT documents.
+- Example: /bookstore/book[1] --Selects the first book element that is the child of the bookstore element
+
+
+Rules that defines the legal elements and attributes for XML documents are called Document Type Definitions (DTD) or XML Schemas.
+There are two different document type definitions that can be used with XML:
+- DTD - The original Document Type Definition
+- XML Schema - An XML-based alternative to DTD
+
+* With a DTD, independent groups of people can agree on a standard for interchanging data.
+* XML Schema is an XML-based alternative to DTD.
+
+Webservices
+- WSDL: Web Services Description Language,XML based, W3C recommended
+- SOAP :  Simple Object Access Protocol, XML based, W3C recommended
+- RDF : Resource Description Framework, XML based, W3C recommended
+- RSS : Really Simple Syndication, XML based, easy way to share and view headlines and content
+- RESTful: Representational State Transfer, HTTP based, JSON/XML formated data
+- Atom: Like RSS
+
+* An RSS document is an XML file which can be used to publish blog entries and news.
+* The format of the XML file is specified via the RSS specification.
+
