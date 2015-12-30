@@ -1,10 +1,13 @@
 package rdf;
 
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.VCARD;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.util.FileManager;
+import org.apache.jena.vocabulary.VCARD;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by hdhamee on 12/21/15.

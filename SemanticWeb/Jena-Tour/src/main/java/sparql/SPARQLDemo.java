@@ -1,8 +1,10 @@
 package sparql;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.util.FileManager;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.util.FileManager;
 
 import java.io.InputStream;
 

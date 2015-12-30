@@ -1,4 +1,4 @@
-<http://somewhere/JohnSmith> <http://www.w3.org/2001/vcard-rdf/3.0#N> _:A297d7832X3aX151c947e011X3aXX2dX7fff .
+<http://somewhere/JohnSmith> <http://www.w3.org/2001/vcard-rdf/3.0#N> _:BX2D59df637dX3A151f186ce84X3AX2D7fff .
 <http://somewhere/JohnSmith> <http://www.w3.org/2001/vcard-rdf/3.0#FN> "John Smith" .
-_:A297d7832X3aX151c947e011X3aXX2dX7fff <http://www.w3.org/2001/vcard-rdf/3.0#Family> "Smith" .
-_:A297d7832X3aX151c947e011X3aXX2dX7fff <http://www.w3.org/2001/vcard-rdf/3.0#Given> "John" .
+_:BX2D59df637dX3A151f186ce84X3AX2D7fff <http://www.w3.org/2001/vcard-rdf/3.0#Family> "Smith" .
+_:BX2D59df637dX3A151f186ce84X3AX2D7fff <http://www.w3.org/2001/vcard-rdf/3.0#Given> "John" .

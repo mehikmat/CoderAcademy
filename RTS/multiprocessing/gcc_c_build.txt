@@ -1,0 +1,44 @@
+GNU GCC Shared Object making steps
+----------------------------------
+- gcc -c -fPIC hello.c
+- gcc -shared -o libhello.so hello.o
+- nm libhello.so | grep method_name
+And use library as
+- gcc sayhello.c lib/libhello.so -I lib
+
+Multhreading in C using GCC
+---------------------------
+- Multithread applications often require synchronization objects.
+- These objects are used to protect memory from being modified by multiple
+  threads at the same time, which might make the data incorrect.
+- One way to handle this condtion is touse MUTEX.
+
+Mutex
+------
+- A mutex is like a lock. A thread can lock it,and then any subsequent attempt to lock it,
+  by the same thread or any other, will cause the attempting thread to block until the mutex
+  is unlocked. In java, mutex is achieved using synchronized keyword.
+- Semaphore is alos used for similar purpose. mutex is generaly unloked by the therad that had locked,
+  But other may unlock if OS provids.
+- Semaphore is like mutex that countes instead of locks. if it reaches zero, then next attempt
+  to access the semaphore will block until someone else increase it.
+ 
+Compiling multithread application
+---------------------------------- 
+- First, we need to include the appropriate header files.
+- For POSIX systems, the header file will be pthread.h,semaphore.h
+- The next change is that we will need to link our program with the pthread library to use it's functions
+- For a compiler like gcc we simply use the -I options, like:  gcc myprogram.c -o myprogram -Ipthread
+
+Creating a thread
+------------------
+- The pthread_create function is used , and it takes 4 arguments.
+  int ptherad_create(pthread_t *pth,pthread_attr_t *att, void * (*function),void * arg);
+1. first argument is a pointer to pthread_t,where the function stores the identifier of the newly created thread. 
+2. second is the attribute argument,usually null,but may point to structur which changes therad attrubutes.
+3. third is the function the new thread will start at.
+4. forth argument is passed to function when the thread is started, like argv/argc in java
+
+Multiprocessing in C
+---------------------
+
