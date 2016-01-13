@@ -18,7 +18,6 @@ import java.io.PrintWriter;
  * Created by hdhamee on 1/4/16.
  */
 public class PlantInferenceServlet extends HttpServlet {
-    static final String NS = "http://jacobnibu.info/ont/garden/";
     static final String rel = "http://jacobnibu.info/ont/garden#";
     static Model tdb;
     static String owlFile = "input/garden.owl";
@@ -28,12 +27,18 @@ public class PlantInferenceServlet extends HttpServlet {
     static String directory = "tdb";
     static ResultSet results;
     static QueryExecution qexec;
+    static String endPoint = "localhost:3030/plant/query";
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         PropertyConfigurator.configure(logFile);
+        /**
+         * These needed if we are creating in-app TDB store
+         */
+
+        /*
         infmodel = createInfModel();
-        tdb = createDBModel(directory,infmodel);
+        tdb = createDBModel(directory,infmodel);*/
     }
 
     @Override
@@ -86,8 +91,21 @@ public class PlantInferenceServlet extends HttpServlet {
     }
 
     private static void executeQuery(String q){
-        Query query = QueryFactory.create(q);
+        /**
+         * For file based model, if the TDB file is on same server
+         */
+
+       /*
+       Query query = QueryFactory.create(q);
         qexec = QueryExecutionFactory.create(query, tdb);
+        */
+
+        /**
+         * For SPARQL end point, if the TDB end point is on separate server
+         */
+        QueryExecution qexec = QueryExecutionFactory.sparqlService(endPoint, q);
+
+        // result of both style
         results = qexec.execSelect();
         System.out.println("\nQuery executed successfully!");
     }
