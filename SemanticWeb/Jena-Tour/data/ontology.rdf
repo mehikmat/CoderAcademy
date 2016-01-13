@@ -11,6 +11,7 @@
 
 <!-- this header commented out, otherwise the ontology
      mysteriously moves to OWL Full. Solutions/insights welcomed! -->
+
 <owl:Ontology rdf:about="http://www.eswc2006.org/technologies/ontology#"
   dc:title="The ESWC2006 Conference Ontology"
   dc:date="$Date: 2007-12-14 19:22:50 $"
@@ -25,12 +26,10 @@
 - formalise inverse relationships now ontology is in owl
 -->
 
-
 <owl:Class rdf:ID="Artefact">
   <rdfs:subClassOf rdf:resource="http://xmlns.com/wordnet/1.6/Document"/>
   <rdfs:label>Artefact</rdfs:label>
 </owl:Class>
-
 
   <owl:ObjectProperty rdf:ID="relatedToEvent">
     <rdfs:domain rdf:resource="#Artefact"/>
