@@ -43,6 +43,7 @@
 	<tr>
 		<td colspan="4">
 			<h1 id="maintitle">Garden Planner</h1>
+			<p>This page sends a SPARQL query to a data set model in persistent storage (TDB storage) and displays the results</p>
 			<h3>Find a plant for your garden:</h3>
 		    <a href="inference.jsp">Inference demo</a>
 		</td>

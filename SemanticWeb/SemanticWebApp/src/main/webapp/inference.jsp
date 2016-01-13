@@ -51,7 +51,7 @@
 		<td>
 			<h1 id="maintitle">Garden Planner</h1>
 			<a href="index.jsp">Home</a>
-			<p>This page sends a SPARQL query to an inference model in persistent storage (TDB storage) and displays the results</p>
+			<p>This page sends a SPARQL query to a SPARQL end-point and displays the results</p>
 		</td>
 	</tr>
 	<tr>
