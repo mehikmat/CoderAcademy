@@ -27,7 +27,7 @@ public class PlantInferenceServlet extends HttpServlet {
     static String directory = "tdb";
     static ResultSet results;
     static QueryExecution qexec;
-    static String endPoint = "localhost:3030/plant/query";
+    static String endPoint = "http://localhost:3030/plants/query";
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -103,7 +103,7 @@ public class PlantInferenceServlet extends HttpServlet {
         /**
          * For SPARQL end point, if the TDB end point is on separate server
          */
-        QueryExecution qexec = QueryExecutionFactory.sparqlService(endPoint, q);
+        qexec = QueryExecutionFactory.sparqlService(endPoint, q);
 
         // result of both style
         results = qexec.execSelect();
