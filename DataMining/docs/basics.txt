@@ -1,0 +1,64 @@
+http://www.tutorialspoint.com/data_mining/index.htm
+
+Data Mining Techniques
+=======================
+Main Highlights
+---------------
+- Characterization
+- Association and Correlation Analysis
+- Classification & Prediction
+- Cluster analysis
+- Outlier analysis
+- Evolution analysis
+- Decision Tree Induction
+
+Data Mining procedure
+---------------------
+    Data Extraction-->Data Cleaning-->Data Integration-->Data Transformation-->Data Mining-->
+    Pattern Evaluation-->Data Presentation.
+
+Data Mining Application
+------------------------
+- Market Analysis and Management
+- Corporate Analysis & Risk Management
+- Fraud Detection
+- Production Control
+- Science Exploration
+
+Data Mining System Classification
+----------------------------------
+A data mining system can be classified according to the following criteria:
+- Database Technology
+- Statistics
+- Machine Learning
+- Information Science
+- Visualization
+- Other Disciplines
+
+Classification and Prediction
+------------------------------
+Two steps:
+1. Classification --- Building the Classifier or Model
+2. Prediction --- Using Classifier/Model for Classification/Prediction
+
+Classification:
+- This step is the learning step or the learning phase
+- In this step the classification algorithms build the classifier
+- The classifier is built from the training set made up of database tuples and their associated class labels.
+- Each tuple that constitutes the training set is referred to as a category or class.
+Classification Algorithms
+- Bayesian Classification
+- Rule-based Classification
+- Genetic Algorithms
+- Rough Set Approach
+- Fuzzy Set Approaches
+
+Prediction:
+Use the classifier to predict the class for new unknown data
+
+
+Decision Tree Induction
+-----------------------
+- A decision tree is a structure that includes a root node, branches, and leaf nodes.
+- Each internal node denotes a test on an attribute, each branch denotes the outcome of a test,
+  and each leaf node holds a class label.
