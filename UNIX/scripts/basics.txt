@@ -7,9 +7,11 @@ UNIX--Uniplexed Information and Computing Service:
 - A user can also run multiple programs at the same time; hence UNIX is called multitasking.
 
 
+
 Login Unix:
 - When you first connect to a UNIX system, you usually see a prompt such as the following:
 - login:
+
 
 
 Change Password:
@@ -19,14 +21,17 @@ Change Password:
 4. Verify the new password by typing it again.
 
 
+
 Listing Directories and Files:
 - You can use `ls`,`ls -a` and `ls -l`(for more) command to list out all the files or directories available in a directory.
 - Enteries starting with d..... represent directories, other represents files.
 
 
+
 Who Are You?:
 - While you're logged into the system, you might be willing to know -- Who am I?
 - just type command `whoami`
+
 
 
 Who is Logged In?:
@@ -35,9 +40,11 @@ Who is Logged In?:
 - Each command gives the diffrent level of information about currently logged in users.
 
 
+
 Logging Out:
 - Type logout command at command prompt, and the system will clean up everything and break the
   connection.
+
 
 
 System Shutdown:
@@ -48,6 +55,7 @@ The most consistent way to shut down a Unix system properly via the command line
 - poweroff:  Shuts down the system by powering off.
 - reboot:  Reboots the system.
 - shutdown: Shuts down the system.
+
 
 
 Unix File Management:
@@ -62,6 +70,7 @@ Unix File Management:
 - Double dot .. --- This represents parent directory.
 
 
+
 Creating Files:
 - vi or vim or gedit to create/edit ordinary files.
 - touch command to create a blak file.
@@ -72,6 +81,7 @@ Creating Files:
 - mkdir for creating directory and mkdir -p for creating dir with parent dirs and rmdir for deleting empty dir.
 
 
+
 Unix–IO Redirections and Standard Unix Streams:
 - Under normal circumstances every Unix program has three streams (files) opened for it when it starts up:
   1. stdin : This is referred to as standard input and associated file descriptor is 0.
@@ -79,6 +89,7 @@ Unix–IO Redirections and Standard Unix Streams:
   3. stderr : This is referred to as standard error and associated file descriptor is 2.
 - eg. sh program_name 0< in_file 2> out_file 3> err_file.
 - You can redirect on stream to other. eg. sh program_name 1>&2
+
 
 
 The Permission Indicators:
@@ -93,6 +104,7 @@ The Permission Indicators:
   eg. chmod +wx
 - chown: The chown command stands for "change owner" and is used to change the owner of a file.
 - chgrp: The chgrp command stands for "change group" and is used to change the group of a file.
+
 
 
 Unix Environment:
@@ -113,6 +125,7 @@ Unix Environment:
 - The characters that the shell displays as your command prompt are stored in the variable PS1, you can change.
 
 
+
 Java Basic Utilities:
 - pr command:The pr command does minor formatting of files on the terminal screen or for a printer.
              eg. pr -2 -h "Restaurants" food.txt --- this makes a two-column file with the header Restaurants.
@@ -123,6 +136,7 @@ Java Basic Utilities:
   $mail -s message_texts [-s subject] [-c cc-addr] [-b bcc-addr] to-addr
 
 
+
 Unix Pipes and Filters:
 - Pipe: To make a pipe, put a vertical bar (|) on the command line between two commands.
 - Filter: When a program takes its input from another program, performs some operation on that input, and writes the
@@ -131,6 +145,7 @@ Unix Pipes and Filters:
   $grep pattern file(s) or $ls -l | grep pattern. and grep -i for case insensitive search.
 - The `sort` command arranges lines of text alphabetically or numerically.
   Options: sort -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
+
 
 
 Unix Processes Managemen:
@@ -150,6 +165,7 @@ Unix Processes Managemen:
 - top command: it is a very useful tool and shows information about physical and virtual memory, CPU usage, load averages, and your busy processes.
 
 
+
 Unix Communication:
 - There are several Unix utilities which are especially useful for users computing in a networked,distributed environment.
 - Ping: The ping command sends an echo request to a host available on the network. eg. ping host_name/ip_addr
@@ -160,6 +176,7 @@ Unix Communication:
 - telnet: It's the traditioal version of ssh.
 - finger: This gives the information about uses in the host. finger user_name gives info about this user.
           finger @avtar.com --- to check all logged in users in romote host avtar.com.
+
 
 
 Unix-What is Shell:
@@ -178,6 +195,7 @@ Unix-What is Shell:
              Simply # is used as comment starter.
 
 
+
 Unix-Using Variables:
 - By convention, Unix Shell variables would have their names in UPPERCASE.
 - unset variable_name is used to unset the value of variable.
@@ -188,6 +206,7 @@ Unix-Using Variables:
 			       Some programs need environment variables in order to function correctly.
      3. Shell Variables: A shell variable is a special variable that is set by the shell and is required by the shell in
                          order to function correctly.
+
 
 
 Unix-Special Variables:
@@ -209,6 +228,7 @@ Unix–Using Arrays:
   Accessing Array Values: ${array_name[index]}
 
 
+
 Unix-Basic Operators:
  1. Arithmetic Operators -- +,-,*,/,=,==,%,!= and eg. `expr 4 + 6` returns 10 or `expr $a * $b` or $a != $b 
  2. Relational Operators -- -eq,-ne,-gt,-lt,-ge,-le and eg. [ $a -eq $b ] will return  true/false.
@@ -217,6 +237,7 @@ Unix-Basic Operators:
  5. File Test Operators -- -b(for block special),-c,-d(for directory),-f and eg [ -d $file_name] to check if file is directory.
 - The Bourne shell didn't originally have any mechanism to perform simple arithmetic but it uses external
   programs,either awk or the must simpler program expr.
+
 
 
 Unix–Decision Making:
@@ -244,6 +265,7 @@ Unix–Decision Making:
 		esac
 
 
+
 Unix–Shell Loops:
 - There are following 3 types of loop constructs
   1. The while loop
@@ -265,7 +287,8 @@ Unix–Shell Loops:
 	  #Statement(s) to be executed until command is true
 	done
 - Above all three loops can be nested.
-		
+	
+	
 
 Unix–Loop Control:
 - There are 2 types of loop control constructs
@@ -279,9 +302,11 @@ Unix–Shell Substitutions:
            Same time "\n" is substituted by a new line -- echo -e "This is $a \n"
 
 
+
 Unix–Quoting Mechanisms(Metacharacters):
 - ? matches with a single charater while listing files in a directory and an * would match more than one characters.
 - escape characters are used to print special characters. eg. echo "\;" 
+
 
 
 Unix–Shell Functions:
@@ -297,6 +322,7 @@ Unix–Shell Functions:
 - You can define a function which would accept parameters while calling those function.
   These parameters would be represented by $1, $2 and so on. Syntax is same as above except send paramters while calling.
 - You can return value from function using `return value` command and accept in calling side using return_value=$?
+
 
 
 Unix-Manpage Help:
@@ -324,6 +350,7 @@ Unix–User Administration:
   3. User Accounts: General user accounts
 
 
+
 Unix–System Performance:
 - UNIX has following major resource types that need to be monitored and tuned
   1. CPU
@@ -344,3 +371,53 @@ Unix–System Logging:
 - Individual programs that need to have information logged send the information to syslog.
 - Programs send their log entries to syslogd, which consults the configuration file /etc/syslogd.conf or /etc/syslog and,
   when a match is found, writes the log message to the desired log file.
+
+
+
+Some Useful Commands:
+#ln command and link command:
+  - ln can create both soft and hard links but link only creates hard links.
+  - A link is soft if it points to target file name instead of actual data pointed by target file.
+  - A link is hard if points to actual data.
+  - Example: ln -s actual_file.txt link_file.txt
+
+
+
+Data Manupulation commands:
+#awk command:
+
+#sed command:
+
+#cmp command:
+
+#comm. command:
+
+#cut command:
+
+#diff command:
+
+#join command:
+
+#sort command:
+
+#split command:
+
+#tr command:
+
+#uniq command:
+
+#wc command:
+
+#fmt command:
+
+#grep command:
+  - Searches a file  or files for lines that have a certain pattern.
+  - The syntax is: $grep pattern file(s) or $ls -l | grep pattern.
+  - Options: -i for case insensitive search.
+
+#sort command:
+  - Arranges lines of text alphabetically or numerically, default string sort.
+  - Syntax: $sort file(s) or $cat file | sort.
+  - Options: -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
+
+

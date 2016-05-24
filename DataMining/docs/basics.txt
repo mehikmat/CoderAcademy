@@ -62,3 +62,8 @@ Decision Tree Induction
 - A decision tree is a structure that includes a root node, branches, and leaf nodes.
 - Each internal node denotes a test on an attribute, each branch denotes the outcome of a test,
   and each leaf node holds a class label.
+
+Bayesian Classification
+-----------------------
+
+
