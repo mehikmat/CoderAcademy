@@ -385,39 +385,62 @@ Some Useful Commands:
 
 Data Manupulation commands:
 #awk command:
-
+ - awk executes a set of instructions for each line of input.
+ - You can specify instructions on the command line or create a script file.
+ - Syntax: awk [-option] 'instructions' files : $awk -F ; '{print $1}'
+ - Options: -f(script file), -F(field delimiter) -v(var=value).
+ - Example: $cat file | awk -F ; '{print $2; print $2}'.
 #sed command:
-
+  - Syntax: $sed [-option] 'instruction' file_name: $sed 's/to_pattern/by_pattern/g' for substituting.
+  - The -e option is necessary only when you supply more than one instruction on the command line.
+  - There are three ways to specify multiple instructions on the command line:
+        1. Separate instructions with semicolon: $sed 's/MA/Mas/;s/PA/Pennsylvania/'
+	2. Precede each instruction by -e : $sed -e 's/MA/Mas/' -e 's/PA/Pennsy/'
+        3. Use the multiline entry capability of the Bourne shell by pressing RETURN after entering a single quote.
+  - To execute a script file using sed: $sed -f scriptfile file.
+  - sed flags: /g(Global replacement),Is(sed recursive),/p(print),/w(Write to a file),/I(Ignore Case).
+  - Options: -n(supress disply of lines) -f(script file) -e(editting instruction).
 #cmp command:
-
-#comm. command:
-
+  - Compares two files, and if they differ, tells the first byte and line number where they differ.
+  - Unlike 'diff', 'cmp' cannot compare directories.
+  - Syntax: $cmp [options] FromFile [ToFile]
+  - Options: -c(character difference) -l(print) -v(verbose) etc.
+#comm command:
+  - To compare files line by line
+  - Syntax: $comm file1 file2
 #cut command:
-
+  - Usage:To divide a file into several parts (columns).
+  - Syntax: $cut [OPTION] [FILE], $cat sample.txt | cut -d \; -f 2 > output.txt
+  - The delimiter must be a single character.
+  - Options: -d(field delimiter),-f(field list).
 #diff command:
-
+  - diff analyzes two files and prints the lines that are different.
+  - It outputs a set of instructions for how to change one file in order to make it identical to the second file.
+  - It can optionally generate a script (with the -e option) for the program ed (or ex) which can be used to apply the changes.
 #join command:
-
-#sort command:
-
+  - Joins the lines of two files which share a common field of data.
+  - Syntax: join [OPTION] FILE1 FILE2.
+  - Options:-1 FIELD(join on this FIELD of file 1),-2 FIELD(join to this FIELD of file2), --header(treat first line as header).
 #split command:
-
-#tr command:
-
+  - split outputs fixed-size pieces of input file to files named PREFIXaa, PREFIXab etc.
+  - The default size for each split file is 1000 lines, and default PREFIX is "x".
+  - Syntax: $split [OPTION] [INPUT [PREFIX]].
+  - Options: -b(split size in byte),-d(numeric suffixes instead of character),-l(no lines per split),-n(no of CHUNKS)
 #uniq command:
-
+  - Does uniq of lines in file.
 #wc command:
-
+  - line or word count.
 #fmt command:
-
+  - fmt is a formatter for simplifying and optimizing text files.
+  - Syntax: $fmt [-WIDTH] [OPTION] [FILE]
 #grep command:
   - Searches a file  or files for lines that have a certain pattern.
   - The syntax is: $grep pattern file(s) or $ls -l | grep pattern.
   - Options: -i for case insensitive search.
-
 #sort command:
   - Arranges lines of text alphabetically or numerically, default string sort.
   - Syntax: $sort file(s) or $cat file | sort.
   - Options: -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
+
 
 
