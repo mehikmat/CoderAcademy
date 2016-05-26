@@ -1,2 +1,29 @@
+
+Types of Messages:
+ - We actually have three different methods of sending messages over computer networks.
+ - Those methods are: unicast, multicast and broadcast.
+ - Unicast:
+   - When using unicast method, one device will send the message to exactly one destination device. 
+ - Broadcast:
+   - Broadcast is a packet that’s sent to all devices on specific network.
+   - Routers don’t forward broadcast messages.
+   - The router will receive the broadcast traffic, but it will not forward it through the router.
+ - Multicast:
+   - Multicasting identifies logical groups of computers. A single message can then be sent to the group.
+   - Multicasting uses the Internet Group Management Protocol (IGMP) to identify groups and group members.
+   - Routers will also use IGMP to send messages to subnets that have group members.
+   - Multicast groups are identified by special IP addresses between the range of 224.0.0.0 and 239.255.255.255.
+   - Hosts can join and leave any group and can join to multiple groups.
+
+Why Multicast:
+ - Although point-to-point(unicast) communications are good for many applications, there are situations in which we need a different model.
+ - For example, in a electronic conferencing system, there is a one-to-many conversation.
+ - Although broadcast (ie. one-to-all communication) may serve for this purpose, its overhead is too large that make it an impractical solution.
+
+Example:
+ - 
+
+
+References:
+https://docs.oracle.com/javase/tutorial/networking/datagrams/broadcasting.html
 http://web.nchu.edu.tw/~jlu/cyut/multicast.shtml
-https://github.com/abhinavbansal246/Ring-Algorithm
