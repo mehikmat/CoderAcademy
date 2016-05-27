@@ -14,6 +14,7 @@ Types of Messages:
    - Routers will also use IGMP to send messages to subnets that have group members.
    - Multicast groups are identified by special IP addresses between the range of 224.0.0.0 and 239.255.255.255.
    - Hosts can join and leave any group and can join to multiple groups.
+   - MulticastSocket is used on the client-side to listen for packets that the server broadcasts to multiple clients.
 
 Why Multicast:
  - Although point-to-point(unicast) communications are good for many applications, there are situations in which we need a different model.
