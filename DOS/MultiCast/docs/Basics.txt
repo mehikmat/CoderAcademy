@@ -22,8 +22,7 @@ Why Multicast:
  - Although broadcast (ie. one-to-all communication) may serve for this purpose, its overhead is too large that make it an impractical solution.
 
 Example:
- - 
-
+ -
 
 References:
 https://docs.oracle.com/javase/tutorial/networking/datagrams/broadcasting.html

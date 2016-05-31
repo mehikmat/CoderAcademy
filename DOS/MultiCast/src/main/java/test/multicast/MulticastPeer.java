@@ -10,15 +10,26 @@ import java.net.SocketException;
  * Created by hdhamee on 5/27/16.
  */
 public class MulticastPeer {
+    // The hard-coded InetAddress of the DatagramPacket is "230.0.0.1" and is a group identifier (rather than the Internet
+    // address of the machine on which a single client is running).
+    // This particular address was arbitrarily chosen from the reserved for this purpose.
+
+    // Created in this way, the DatagramPacket is destined for all clients listening to port number 4446 who are member of the
+    // "230.0.0.1" group.
+
+    // Notice that the server uses a DatagramSocket to broadcast packet received by the client over a MulticastSocket.
+    // Alternatively, it could have used a MulticastSocket. The socket used by the server to send the DatagramPacket is not important.
+    // What's important when broadcasting packets is the addressing information contained in the DatagramPacket,and the socket
+    // used by the client to listen for it.
+
     public static void main(String[] args) {
-        // args give message contents & destination multicast group
-        // eg. java MulticastPeer "message" all-hosts.mcast.net
+        // Could be used DatagramSocket instead if the server only sends message and doesn't receive other peers message.
         MulticastSocket s = null;
         try {
-            InetAddress group = InetAddress.getByName("224.0.0.4");
+            InetAddress group = InetAddress.getByName("230.0.0.1");
 
-            // The hard-coded port number is 6789 (the client must have a
-            // MulticastSocket bound to this port).
+            // The hard-coded port number is 6789 (the client must have a MulticastSocket bound to this port).
+            // The port number doesn't actually matter in this example because the client never send anything to the server.
             s = new MulticastSocket(6789);
 
             // the input InetAddress is the multicast group
