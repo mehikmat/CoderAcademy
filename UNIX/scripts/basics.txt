@@ -247,11 +247,12 @@ Unix–Using Arrays:
 Unix-Basic Operators:
  1. Arithmetic Operators -- +,-,*,/,=,==,%,!= and eg. `expr 4 + 6` returns 10 or `expr $a * $b` or $a != $b 
  2. Relational Operators -- -eq,-ne,-gt,-lt,-ge,-le and eg. [ $a -eq $b ] will return  true/false.
- 3. Boolean Operators -- !(NOT),-a(AND),-o(OR)
+ 3. Boolean Operators -- !(NOT),-a(AND),-o(OR) or &&(and), ||(or)
  4. String Operators -- =, !=,-z,-n,Str and eg. 
  5. File Test Operators -- -b(for block special),-c,-d(for directory),-f and eg [ -d $file_name] to check if file is directory.
 - The Bourne shell didn't originally have any mechanism to perform simple arithmetic but it uses external
   programs,either awk or the must simpler program expr.
+- colon (:) command does nothing, just a placeholder.
 
 
 
@@ -294,7 +295,7 @@ Unix–Shell Loops:
        for var in word1 word2 ... wordN
        do
 	 #Statement(s) to be executed for every word.
-       done
+       done [& to send to background, | for pipelining, while..;do..;done to execute in single line, done> for redicrection]
   3. The until loop
      Syntax:
         until [ expression ]
@@ -308,6 +309,7 @@ Unix–Shell Loops:
 Unix–Loop Control:
 - There are 2 types of loop control constructs
   1. The break statement: eg. break, break -5 etc.
+     - `break` can be followed by a number n,which means that it will break n innermost loops.
   2. The continue statement
 
 
@@ -483,5 +485,41 @@ Shell Responsibility:
 – Pipeline Hookup
 – Environment Control
 – Interpret Programming Language
+
+Command-line argument parsing:
+- Command line options can be classified into 3 types:
+   - Options which does not take arguments-- $>ls -l
+   - Options which take arguments -- $>cut -d ","
+   - Options + Additional command line arguments -- $>ls -l file1 file2 file3 
+- `shift` is a bash built-in which kind of removes arguments in beginning of the argument list. Given that the argument
+   provided to the script are 3 available in $1, $2, $3, then a call to shift will make $2 the new $1. a shift 2 will shift
+   by two making new $1 the old $3. for more info see here.
+   - ${n} format to access positional parameter grater than 9.
+   - shift 3 has the same effect as performing three separate shifts.
+- `getopts` allows a program to take options in any order on the command line.
+   - Syntax: getopts optstrinng name -- optstring is string of expected options and name is variable to hold option.
+   - This only supports single character short options with single dash and multi-character long options with two dashes.
+   - getopts uses 2 env variables:
+      - OPTARG -- contains the argument value for a particular option,
+      - OPTIND -- contains the index of next command line option.
+   - Example:
+     - Options without argument
+     while getopts dm name  // where d and m are options
+	do
+	        case $name in
+	          d)dopt=1;;
+	          m)mopt=1;;
+	          *)echo "Invalid arg";;
+	        esac
+	done
+     - Options with arguments
+     while getopts d:m name // where d and m are options
+	do
+	        case $name in
+	          d)dopt=$OPTARG;;
+	          m)mopt=1;;
+	          *)echo "Invalid arg";;
+	        esac
+	done
 
 
