@@ -456,13 +456,32 @@ Data Manupulation commands:
   - Arranges lines of text alphabetically or numerically, default string sort.
   - Syntax: $sort file(s) or $cat file | sort.
   - Options: -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
+#ed command:
+  - 1,$p prints all the lines.
+  - 1,$s/p.o/XXX/g changes all p.os to XXX.
+  - /^the/ finds the lines that starts with the.
 
 
 Matching Single Characters
+- [.] A period in a regular expression matches any single character.
 - [abc] matches one letter a, b, or c.
 - The specification [0-9] matches the characters 0 through 9.
 - [a-np-z]* matches all files that start with the letters a through n or p through z (or any lowercase letter but o).
 - [!a-z] matches any character except a lowercase letter.
 - *[!o] matches any file that doesn't end with the lowercase letter o.
 - ls [a-z]*[!0-9] lists files that begin with a lowercase letter and don't end with a digit.
+- Matching the Beginning of the Line: The Caret ( ^ ).
+- Matching the End of the Line: The Dollar Sign ( $ ).
+- Matching Zero or More Characters: The Asterisk ( * ).
+
+
+Shell Responsibility:
+- The shell analyzes each line you type in and initiates execution of the selected program.
+- Program Execution
+– Variable and Filename Substitution.
+– I/O Redirection
+– Pipeline Hookup
+– Environment Control
+– Interpret Programming Language
+
 
