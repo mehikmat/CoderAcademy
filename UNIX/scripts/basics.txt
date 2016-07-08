@@ -14,6 +14,7 @@ Basic Commands:
 - $>hostname -- shows the name of computer
 - $>uname, $> uname -a -- shows the name of OS, more details
 - $>lock, $>lock -5 -- locks the terminal for 15 min, for 5 min and requirs password for unlock
+- $>leave, $>leave +15, $>leave 1030 -- Reminds you when to leave computer, after 15 min, after 10h 30min
 
 Login Unix:
 - When you first connect to a UNIX system, you usually see a prompt such as the following:
