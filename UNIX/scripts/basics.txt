@@ -16,6 +16,11 @@ Basic Commands:
 - $>lock, $>lock -5 -- locks the terminal for 15 min, for 5 min and requirs password for unlock
 - $>leave, $>leave +15, $>leave 1030 -- Reminds you when to leave computer, after 15 min, after 10h 30min
 
+Build-in programs
+- bc -- a build in fully programmable calculator
+- dc -- a eariler desk calculator, stack based
+
+
 Login Unix:
 - When you first connect to a UNIX system, you usually see a prompt such as the following:
 - login:
@@ -85,7 +90,7 @@ Creating Files:
 - head/tail/more/less command to read parts of files.
 - cat and cat -b (with line number) to read files.
 - wc to count words and wc -l to count lines in file.
-- cp for copy, rm for deleting, mv for moving files with -r/rm -rf option for directories.
+- cp for copy, rm for deleting, mv for moving files. $>rm -r/-rf dir,$>rmdir dir for directories.
 - mkdir for creating directory and mkdir -p for creating dir with parent dirs and rmdir for deleting empty dir.
 
 
@@ -153,6 +158,7 @@ Unix Pipes and Filters:
   $grep pattern file(s) or $ls -l | grep pattern. and grep -i for case insensitive search.
 - The `sort` command arranges lines of text alphabetically or numerically.
   Options: sort -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
+- Writing more than one commands in one line -- $>date;pwd;ls;wc-l -- semical is used to separte commands.
 
 
 
@@ -171,6 +177,7 @@ Unix Processes Managemen:
                                When a process is killed, a ps listing may still show the process with a Z state, Zombie process.
 - Daemons process: These are system-related background processes and has no controlling tty. ps -ef shows ? for these in tty field.
 - top command: it is a very useful tool and shows information about physical and virtual memory, CPU usage, load averages, and your busy processes.
+- ampersand(&) is used to send command execution in background -- $> ls &
 
 
 
@@ -183,7 +190,7 @@ Unix Communication:
 - sftp: It's secure versionof ftp.
 - telnet: It's the traditioal version of ssh.
 - finger: This gives the information about uses in the host. finger user_name gives info about this user.
-          finger @avtar.com --- to check all logged in users in romote host avtar.com.
+          finger @avtar.com --- to check all logged in users in romote host avtar.com
 
 
 
@@ -451,4 +458,11 @@ Data Manupulation commands:
   - Options: -n(numerical),-r(reverse),-f(u/l insensitive),+x(ignore first x fiels).
 
 
+Matching Single Characters
+- [abc] matches one letter a, b, or c.
+- The specification [0-9] matches the characters 0 through 9.
+- [a-np-z]* matches all files that start with the letters a through n or p through z (or any lowercase letter but o).
+- [!a-z] matches any character except a lowercase letter.
+- *[!o] matches any file that doesn't end with the lowercase letter o.
+- ls [a-z]*[!0-9] lists files that begin with a lowercase letter and don't end with a digit.
 
