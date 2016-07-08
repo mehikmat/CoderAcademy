@@ -498,7 +498,8 @@ Command-line argument parsing:
    - shift 3 has the same effect as performing three separate shifts.
 - `getopts` allows a program to take options in any order on the command line.
    - Syntax: getopts optstrinng name -- optstring is string of expected options and name is variable to hold option.
-   - This only supports single character short options with single dash and multi-character long options with two dashes.
+   - getopts only supports single character short options with single dash.
+   - Another command getopt supports long options but is not bash build-in.
    - getopts uses 2 env variables:
       - OPTARG -- contains the argument value for a particular option,
       - OPTIND -- contains the index of next command line option.
@@ -513,7 +514,7 @@ Command-line argument parsing:
 	        esac
 	done
      - Options with arguments
-     while getopts d:m name // where d and m are options
+     while getopts d:m: name // where d and m are options, colon needed to indicate these have argument too.
 	do
 	        case $name in
 	          d)dopt=$OPTARG;;
@@ -521,5 +522,6 @@ Command-line argument parsing:
 	          *)echo "Invalid arg";;
 	        esac
 	done
+
 
 
