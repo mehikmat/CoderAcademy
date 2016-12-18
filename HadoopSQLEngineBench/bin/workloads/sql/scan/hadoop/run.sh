@@ -36,11 +36,9 @@ prepare-sql-scan ${HIVEBENCH_SQL_FILE}
 
 # run bench
 CMD="$HIVE_HOME/bin/hive -f ${HIVEBENCH_SQL_FILE}"
-MONITOR_PID=`start-monitor`
 START_TIME=`timestamp`
 execute_withlog $CMD
 END_TIME=`timestamp`
-stop-monitor $MONITOR_PID
 
 sleep 5
 SIZE=`dir_size $OUTPUT_HDFS`
