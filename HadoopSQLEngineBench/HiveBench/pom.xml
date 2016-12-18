@@ -1,0 +1,42 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.ncit.hivebench</groupId>
+    <artifactId>HiveBench</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>Hive Benchmarking</name>
+
+    <parent>
+        <groupId>edu.ncit</groupId>
+        <artifactId>HadoopSQLEngineBench</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <properties>
+        <repo>http://archive.apache.org</repo>
+        <file>dist/hive/hive-0.14.0/apache-hive-0.14.0-bin.tar.gz</file>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>${download-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${repo}/${file}</url>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

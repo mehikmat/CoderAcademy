@@ -1,0 +1,147 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.ncit</groupId>
+    <artifactId>HadoopSQLEngineBench</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>Hadoop Based SQL Engine Benchmarking</name>
+
+    <properties>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+        <scala.version>2.11.5</scala.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <spark.version>2.0.0</spark.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <scopt.version>3.2.0</scopt.version>
+        <uncommons-maths.version>1.2.2a</uncommons-maths.version>
+        <junit.version>3.8.1</junit.version>
+        <hadoop.mr2.version>2.7.1</hadoop.mr2.version>
+        <scala-maven-plugin.version>3.2.0</scala-maven-plugin.version>
+        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+        <maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
+        <maven-jar-plugin.version>2.3.2</maven-jar-plugin.version>
+        <build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+        <download-maven-plugin.version>1.2.0</download-maven-plugin.version>
+        <jetty.version>8.1.14.v20131031</jetty.version>
+        <scalatest.version>2.2.1</scalatest.version>
+        <scalacheck.version>1.11.3</scalacheck.version>
+        <fastutil.version>6.5.15</fastutil.version>
+    </properties>
+
+    <modules>
+        <module>DataGenTool</module>
+        <module>HiveBench</module>
+        <module>SparkSQLBench</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <!-- This should be at top, it makes maven try the central repo first and then others and hence faster dep resolution -->
+            <name>Maven Repository</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>apache-repo</id>
+            <name>Apache Repository</name>
+            <url>https://repository.apache.org/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven 2 Repository</name>
+            <url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>${scala-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>DataGenTool</id>
+            <modules>
+                <module>DataGenTool</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>SparkSQLBench</id>
+            <modules>
+                <module>SparkSQLBench</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>HiveBench</id>
+            <modules>
+                <module>HiveBench</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>DefaultBench</id>
+            <modules>
+                <module>DataGenTool</module>
+                <module>SparkSQLBench</module>
+                <module>HiveBench</module>
+            </modules>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+    </profiles>
+</project>
