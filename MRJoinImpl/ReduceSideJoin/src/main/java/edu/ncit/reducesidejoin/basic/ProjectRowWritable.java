@@ -1,5 +1,6 @@
 package edu.ncit.reducesidejoin.basic;
 
+import edu.ncit.reducesidejoin.util.StringHelper;
 import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
@@ -158,11 +159,4 @@ public class ProjectRowWritable implements WritableComparable<ProjectRowWritable
     public int compareTo(ProjectRowWritable o) {
         return this.project_id.compareTo(o.project_id);
     }
-
-    @Override
-    public String toString() {
-        return String.format("%s|school=%s|total_amount=%s|status=%s",
-                project_id, school_id, total_price_including_opt_donation, funding_status);
-    }
-
 }

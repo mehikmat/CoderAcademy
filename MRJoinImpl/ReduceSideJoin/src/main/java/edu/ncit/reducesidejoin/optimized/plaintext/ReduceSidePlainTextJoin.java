@@ -1,6 +1,7 @@
-package edu.ncit.reducesidejoin.basic;
+package edu.ncit.reducesidejoin.optimized.plaintext;
 
-import org.apache.hadoop.io.ObjectWritable;
+import edu.ncit.reducesidejoin.optimized.projection.DonationRowProjectedWritable;
+import edu.ncit.reducesidejoin.optimized.projection.ProjectRowProjectedWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -12,39 +13,46 @@ import java.util.List;
 /**
  * Created by hdhamee on 7/10/17.
  */
-public class ReduceSideJoin {
+public class ReduceSidePlainTextJoin {
 
     // Donations Mapper
-    public static class DonationsMapper extends Mapper<Object, Text, Text, ObjectWritable> {
+    public static class DonationsPlainTextMapper extends Mapper<Object, Text, Text, Text> {
         private Text outputKey = new Text();
-        private ObjectWritable outputValue = new ObjectWritable();
+        private Text outputValue = new Text();
 
         @Override
         public void map(Object rowOffset, Text donationRow, Context context) throws IOException, InterruptedException {
-            // Parse csv line to create DonationRowWritable object
-            DonationRowWritable donationRowWritable = new DonationRowWritable();
-            donationRowWritable.parseLine(donationRow.toString());
+            // Parse csv line to create DonationRowProjectedWritable object
+            DonationRowProjectedWritable donation = new DonationRowProjectedWritable();
+            donation.parseLine(donationRow.toString());
 
-            outputKey.set(donationRowWritable.project_id);
-            outputValue.set(donationRowWritable);
+            String donationOutput = String.format("D|%s|%s|%s|%s|%.2f", donation.donation_id,
+                    donation.project_id, donation.ddate, donation.donor_city, donation.total);
+
+            outputKey.set(donation.project_id);
+            outputValue.set(donationOutput);
 
             context.write(outputKey, outputValue);
         }
     }
 
     // Projects Mapper
-    public static class ProjectsMapper extends Mapper<Object, Text, Text, ObjectWritable> {
+    public static class ProjectsPlainTextMapper extends Mapper<Object, Text, Text, Text> {
         private Text outputKey = new Text();
-        private ObjectWritable outputValue = new ObjectWritable();
+        private Text outputValue = new Text();
 
         @Override
         public void map(Object rowOffset, Text projectRow, Context context) throws IOException, InterruptedException {
             // Parse csv line to create ProjectRowProjectedWritable object
-            ProjectRowWritable projectRowWritable = new ProjectRowWritable();
-            projectRowWritable.parseLine(projectRow.toString());
+            ProjectRowProjectedWritable project = new ProjectRowProjectedWritable();
+            project.parseLine(projectRow.toString());
 
-            outputKey.set(projectRowWritable.project_id);
-            outputValue.set(projectRowWritable);
+            // Create new object with projected values
+            String projectOutput = String.format("P|%s|%s|%s|%s",
+                    project.project_id, project.school_city, project.poverty_level, project.primary_focus_subject);
+
+            outputKey.set(project.project_id);
+            outputValue.set(projectOutput);
 
             context.write(outputKey, outputValue);
         }
@@ -55,7 +63,7 @@ public class ReduceSideJoin {
      * Each invocation of the reduce() method will receive a list of ObjectWritable.
      * These ObjectWritable objects are either Donation or Project objects, and are all linked by the same "project_id".
      */
-    public static class JoinReducer extends Reducer<Text, ObjectWritable, Text, Text> {
+    public static class PlainTextJoinReducer extends Reducer<Text, Text, Text, Text> {
         private static final String NULL_DONATION_OUTPUT = "null|null|null|null|null";
         private static final String NULL_PROJECT_OUTPUT = "null|null|null|null";
 
@@ -66,30 +74,29 @@ public class ReduceSideJoin {
         private List<String> projectsList = new ArrayList<>();
 
         @Override
-        protected void reduce(Text projectId, Iterable<ObjectWritable> values, Context context) throws IOException, InterruptedException {
+        protected void reduce(Text projectId, Iterable<Text> values, Context context) throws IOException, InterruptedException {
             // Clear data lists
             donationsList.clear();
             projectsList.clear();
 
             // Fill up data lists with selected fields
-            for (ObjectWritable value : values) {
-                Object object = value.get();
+            for (Text value : values) {
+                String textVal = value.toString();
 
-                if (object instanceof DonationRowWritable) {
-                    DonationRowWritable donation = (DonationRowWritable) object;
-                    String donationOutput = String.format("%s|%s|%s|%s|%.2f", donation.donation_id, donation.project_id,
-                            donation.donor_city, donation.ddate, donation.total);
-                    donationsList.add(donationOutput);
+                // Get first char which determines the type of data
+                char type = textVal.charAt(0);
 
-                } else if (object instanceof ProjectRowWritable) {
-                    ProjectRowWritable project = (ProjectRowWritable) object;
-                    String projectOutput = String.format("%s|%s|%s|%s", project.project_id, project.school_city,
-                            project.poverty_level, project.primary_focus_subject);
-                    projectsList.add(projectOutput);
+                // Remove the type flag "P|" or "D|" from the beginning to get original data content
+                textVal = textVal.substring(2);
+
+                if (type == 'D') {
+                    donationsList.add(textVal);
+
+                } else if (type == 'P') {
+                    projectsList.add(textVal);
 
                 } else {
-                    String errorMsg = String.format("Object of class %s is neither a %s nor %s.",
-                            object.getClass().getName(), ProjectRowWritable.class.getName(), DonationRowWritable.class.getName());
+                    String errorMsg = String.format("Type is neither a D nor P.");
                     throw new IOException(errorMsg);
                 }
             }

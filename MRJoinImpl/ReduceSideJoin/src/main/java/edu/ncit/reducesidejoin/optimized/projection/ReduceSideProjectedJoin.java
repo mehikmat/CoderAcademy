@@ -1,5 +1,7 @@
-package edu.ncit.reducesidejoin.basic;
+package edu.ncit.reducesidejoin.optimized.projection;
 
+import edu.ncit.reducesidejoin.basic.DonationRowWritable;
+import edu.ncit.reducesidejoin.basic.ProjectRowWritable;
 import org.apache.hadoop.io.ObjectWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -12,17 +14,17 @@ import java.util.List;
 /**
  * Created by hdhamee on 7/10/17.
  */
-public class ReduceSideJoin {
+public class ReduceSideProjectedJoin {
 
     // Donations Mapper
-    public static class DonationsMapper extends Mapper<Object, Text, Text, ObjectWritable> {
+    public static class DonationsProjectedMapper extends Mapper<Object, Text, Text, ObjectWritable> {
         private Text outputKey = new Text();
         private ObjectWritable outputValue = new ObjectWritable();
 
         @Override
         public void map(Object rowOffset, Text donationRow, Context context) throws IOException, InterruptedException {
-            // Parse csv line to create DonationRowWritable object
-            DonationRowWritable donationRowWritable = new DonationRowWritable();
+            // Parse csv line to create DonationRowPlainTextWritable object
+            DonationRowProjectedWritable donationRowWritable = new DonationRowProjectedWritable();
             donationRowWritable.parseLine(donationRow.toString());
 
             outputKey.set(donationRowWritable.project_id);
@@ -33,14 +35,14 @@ public class ReduceSideJoin {
     }
 
     // Projects Mapper
-    public static class ProjectsMapper extends Mapper<Object, Text, Text, ObjectWritable> {
+    public static class ProjectsProjectedMapper extends Mapper<Object, Text, Text, ObjectWritable> {
         private Text outputKey = new Text();
         private ObjectWritable outputValue = new ObjectWritable();
 
         @Override
         public void map(Object rowOffset, Text projectRow, Context context) throws IOException, InterruptedException {
             // Parse csv line to create ProjectRowProjectedWritable object
-            ProjectRowWritable projectRowWritable = new ProjectRowWritable();
+            ProjectRowProjectedWritable projectRowWritable = new ProjectRowProjectedWritable();
             projectRowWritable.parseLine(projectRow.toString());
 
             outputKey.set(projectRowWritable.project_id);
@@ -55,7 +57,7 @@ public class ReduceSideJoin {
      * Each invocation of the reduce() method will receive a list of ObjectWritable.
      * These ObjectWritable objects are either Donation or Project objects, and are all linked by the same "project_id".
      */
-    public static class JoinReducer extends Reducer<Text, ObjectWritable, Text, Text> {
+    public static class ProjectedJoinReducer extends Reducer<Text, ObjectWritable, Text, Text> {
         private static final String NULL_DONATION_OUTPUT = "null|null|null|null|null";
         private static final String NULL_PROJECT_OUTPUT = "null|null|null|null";
 
@@ -75,13 +77,13 @@ public class ReduceSideJoin {
             for (ObjectWritable value : values) {
                 Object object = value.get();
 
-                if (object instanceof DonationRowWritable) {
+                if (object instanceof DonationRowProjectedWritable) {
                     DonationRowWritable donation = (DonationRowWritable) object;
                     String donationOutput = String.format("%s|%s|%s|%s|%.2f", donation.donation_id, donation.project_id,
                             donation.donor_city, donation.ddate, donation.total);
                     donationsList.add(donationOutput);
 
-                } else if (object instanceof ProjectRowWritable) {
+                } else if (object instanceof ProjectRowProjectedWritable) {
                     ProjectRowWritable project = (ProjectRowWritable) object;
                     String projectOutput = String.format("%s|%s|%s|%s", project.project_id, project.school_city,
                             project.poverty_level, project.primary_focus_subject);
@@ -89,7 +91,7 @@ public class ReduceSideJoin {
 
                 } else {
                     String errorMsg = String.format("Object of class %s is neither a %s nor %s.",
-                            object.getClass().getName(), ProjectRowWritable.class.getName(), DonationRowWritable.class.getName());
+                            object.getClass().getName(), ProjectRowProjectedWritable.class.getName(), DonationRowProjectedWritable.class.getName());
                     throw new IOException(errorMsg);
                 }
             }
