@@ -1,4 +1,4 @@
-package edu.ncit.reducesidejoin;
+package edu.ncit.reducesidejoin.basic;
 
 import org.apache.hadoop.io.ObjectWritable;
 import org.apache.hadoop.io.Text;

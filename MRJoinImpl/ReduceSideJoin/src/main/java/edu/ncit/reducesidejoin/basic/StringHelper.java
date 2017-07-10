@@ -1,4 +1,4 @@
-package edu.ncit.reducesidejoin;
+package edu.ncit.reducesidejoin.basic;
 
 import java.util.regex.Pattern;
 
